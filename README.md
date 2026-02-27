@@ -135,6 +135,19 @@ Register this MCP server in your client MCP config with:
 
 A minimal config template is in `mcp_config.example.json`.
 
+## Deploy on Railway (for Claude web / remote MCP)
+1. Push this repo to GitHub.
+2. In Railway: `New Project` -> `Deploy from GitHub repo` -> select this repository.
+3. Railway auto-detects Python and uses `railway.json`.
+4. After deploy, open the public URL and verify:
+   - `GET /health` returns `{"ok": true}`
+5. Your MCP endpoint is:
+   - `https://<your-railway-domain>/mcp`
+
+Important:
+- `xlwings` is Windows-only and is not installed on Railway Linux (already handled in `requirements.txt`).
+- Excel snapshot scripts are local-only; remote runtime is the MCP valuation engine.
+
 ## Publish to GitHub
 Recommended flow:
 1. create an empty GitHub repo (no auto README)

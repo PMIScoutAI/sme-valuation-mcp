@@ -30,6 +30,8 @@ try:
 except Exception:  # pragma: no cover
     FastMCP = None
 
+mcp = None
+
 
 if FastMCP is not None:
     mcp = FastMCP("sme-valuation-engine")
