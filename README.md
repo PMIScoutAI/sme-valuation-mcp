@@ -98,6 +98,12 @@ git remote add origin <URL_REPO_GITHUB>
 git push -u origin main
 ```
 
+Oppure script automatico (crea repo via API + push):
+```powershell
+$env:GITHUB_TOKEN="<PAT_GITHUB>"
+powershell -ExecutionPolicy Bypass -File .\scripts\publish_github.ps1 -RepoName "pmi-valuation-mcp" -Description "PMI Valuation MCP" 
+```
+
 ## Stato attuale
 - engine v1 pronto
 - schema/input validation pronta
