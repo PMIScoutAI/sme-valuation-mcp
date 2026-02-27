@@ -1,0 +1,182 @@
+{
+  "scenario": "baseline_repeat",
+  "source_workbook": "C:\\Mcp\\PMI_datapack.xlsx",
+  "golden_outputs": "C:\\Mcp\\spec\\golden_outputs.yaml",
+  "values": [
+    {
+      "key": "dcf_year_label",
+      "sheet": "DCF",
+      "cell": "J15",
+      "description": "DCF reference year",
+      "value": 2024.0
+    },
+    {
+      "key": "dcf_g_y2",
+      "sheet": "DCF",
+      "cell": "D20",
+      "description": "Growth rate year 2",
+      "value": 0.058688458161680224
+    },
+    {
+      "key": "dcf_g_y6",
+      "sheet": "DCF",
+      "cell": "H20",
+      "description": "Growth rate year 6",
+      "value": 0.00746268656716409
+    },
+    {
+      "key": "dcf_g_y9",
+      "sheet": "DCF",
+      "cell": "K20",
+      "description": "Growth rate year 9",
+      "value": 0.014999999999999902
+    },
+    {
+      "key": "proj_margin_y1",
+      "sheet": "Proiezioni",
+      "cell": "C23",
+      "description": "Projected margin year 1",
+      "value": 0.4127777402579861
+    },
+    {
+      "key": "proj_margin_y2",
+      "sheet": "Proiezioni",
+      "cell": "D23",
+      "description": "Projected margin year 2",
+      "value": 0.3808050523092626
+    },
+    {
+      "key": "proj_growth_y2",
+      "sheet": "Proiezioni",
+      "cell": "D13",
+      "description": "Projected growth year 2",
+      "value": 0.058688458161680224
+    },
+    {
+      "key": "proj_growth_y8",
+      "sheet": "Proiezioni",
+      "cell": "J13",
+      "description": "Projected growth year 8",
+      "value": 0.007246376811594235
+    },
+    {
+      "key": "borsa_multiple_ev_ebitda",
+      "sheet": "Multipli di borsa",
+      "cell": "C25",
+      "description": "EV/EBITDA multiple",
+      "value": 6.286896000000001
+    },
+    {
+      "key": "borsa_multiple_ev_ebit",
+      "sheet": "Multipli di borsa",
+      "cell": "C27",
+      "description": "EV/EBIT multiple",
+      "value": 4.322241000000001
+    },
+    {
+      "key": "borsa_ev_output",
+      "sheet": "Multipli di borsa",
+      "cell": "C47",
+      "description": "Implied enterprise value",
+      "value": 49926.58529750001
+    },
+    {
+      "key": "borsa_equity_output",
+      "sheet": "Multipli di borsa",
+      "cell": "D47",
+      "description": "Implied equity value",
+      "value": 45286.136104342724
+    },
+    {
+      "key": "transazioni_multiple",
+      "sheet": "Multipli di transazioni",
+      "cell": "L25",
+      "description": "Transaction multiple",
+      "value": 4.982131701873831
+    },
+    {
+      "key": "transazioni_ev_min",
+      "sheet": "Multipli di transazioni",
+      "cell": "C54",
+      "description": "Transaction EV lower bound",
+      "value": 39985.319178569065
+    },
+    {
+      "key": "transazioni_ev_mid",
+      "sheet": "Multipli di transazioni",
+      "cell": "D54",
+      "description": "Transaction EV midpoint",
+      "value": 47893.96924818977
+    },
+    {
+      "key": "transazioni_ev_max",
+      "sheet": "Multipli di transazioni",
+      "cell": "E54",
+      "description": "Transaction EV upper bound",
+      "value": 48838.718256274144
+    },
+    {
+      "key": "ff_block1_base",
+      "sheet": "Football field",
+      "cell": "C46",
+      "description": "Football field first block base",
+      "value": 61.65494204909382
+    },
+    {
+      "key": "ff_block1_delta1",
+      "sheet": "Football field",
+      "cell": "D46",
+      "description": "Football field first block delta 1",
+      "value": 7.71850586435663
+    },
+    {
+      "key": "ff_block1_delta2",
+      "sheet": "Football field",
+      "cell": "E46",
+      "description": "Football field first block delta 2",
+      "value": 10.141013301163737
+    },
+    {
+      "key": "ff_block2_base",
+      "sheet": "Football field",
+      "cell": "C47",
+      "description": "Football field second block base",
+      "value": 67.99532135966228
+    },
+    {
+      "key": "patrimoniale_base",
+      "sheet": "Patrimoniale e misto",
+      "cell": "C17",
+      "description": "Patrimoniale baseline",
+      "value": 36461.0
+    },
+    {
+      "key": "patrimoniale_ev",
+      "sheet": "Patrimoniale e misto",
+      "cell": "C86",
+      "description": "Patrimoniale EV output",
+      "value": 54667.351092185796
+    },
+    {
+      "key": "patrimoniale_equity",
+      "sheet": "Patrimoniale e misto",
+      "cell": "C95",
+      "description": "Patrimoniale equity output",
+      "value": 40203.351092185796
+    },
+    {
+      "key": "actual_year",
+      "sheet": "Actual data",
+      "cell": "I8",
+      "description": "Latest historical year",
+      "value": 2019.0
+    },
+    {
+      "key": "actual_margin_y1",
+      "sheet": "Actual data",
+      "cell": "C23",
+      "description": "Actual margin first year",
+      "value": 0.3514009628372528
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+﻿{
+  "meta": {
+    "company_name": "PMI Demo Srl",
+    "currency": "EUR",
+    "years": 5
+  },
+  "actuals": {
+    "revenue": [12.5, 13.1, 14.0],
+    "ebitda": [2.1, 2.3, 2.6],
+    "ebit": [1.2, 1.3, 1.6],
+    "net_income": [0.8, 0.9, 1.1],
+    "nfp": 4.5
+  },
+  "assumptions": {
+    "tax_rate": 0.27,
+    "wacc": 0.11,
+    "terminal_growth": 0.02,
+    "revenue_cagr": 0.06,
+    "ebitda_margin": 0.19,
+    "capex_pct_revenue": 0.04,
+    "nwc_pct_revenue": 0.03
+  },
+  "multiples": {
+    "ev_ebitda_multiple": 7.5,
+    "ev_ebit_multiple": 10.0
+  }
+}

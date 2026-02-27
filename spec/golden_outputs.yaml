@@ -1,0 +1,113 @@
+﻿version: "0.2"
+source_workbook: "PMI_datapack.xlsx"
+notes:
+  - "Celle output selezionate con valore non nullo su workbook baseline."
+  - "Usare questo file come baseline regressiva cross-sheet."
+
+outputs:
+  - key: dcf_year_label
+    sheet: "DCF"
+    cell: "J15"
+    description: "DCF reference year"
+  - key: dcf_g_y2
+    sheet: "DCF"
+    cell: "D20"
+    description: "Growth rate year 2"
+  - key: dcf_g_y6
+    sheet: "DCF"
+    cell: "H20"
+    description: "Growth rate year 6"
+  - key: dcf_g_y9
+    sheet: "DCF"
+    cell: "K20"
+    description: "Growth rate year 9"
+
+  - key: proj_margin_y1
+    sheet: "Proiezioni"
+    cell: "C23"
+    description: "Projected margin year 1"
+  - key: proj_margin_y2
+    sheet: "Proiezioni"
+    cell: "D23"
+    description: "Projected margin year 2"
+  - key: proj_growth_y2
+    sheet: "Proiezioni"
+    cell: "D13"
+    description: "Projected growth year 2"
+  - key: proj_growth_y8
+    sheet: "Proiezioni"
+    cell: "J13"
+    description: "Projected growth year 8"
+
+  - key: borsa_multiple_ev_ebitda
+    sheet: "Multipli di borsa"
+    cell: "C25"
+    description: "EV/EBITDA multiple"
+  - key: borsa_multiple_ev_ebit
+    sheet: "Multipli di borsa"
+    cell: "C27"
+    description: "EV/EBIT multiple"
+  - key: borsa_ev_output
+    sheet: "Multipli di borsa"
+    cell: "C47"
+    description: "Implied enterprise value"
+  - key: borsa_equity_output
+    sheet: "Multipli di borsa"
+    cell: "D47"
+    description: "Implied equity value"
+
+  - key: transazioni_multiple
+    sheet: "Multipli di transazioni"
+    cell: "L25"
+    description: "Transaction multiple"
+  - key: transazioni_ev_min
+    sheet: "Multipli di transazioni"
+    cell: "C54"
+    description: "Transaction EV lower bound"
+  - key: transazioni_ev_mid
+    sheet: "Multipli di transazioni"
+    cell: "D54"
+    description: "Transaction EV midpoint"
+  - key: transazioni_ev_max
+    sheet: "Multipli di transazioni"
+    cell: "E54"
+    description: "Transaction EV upper bound"
+
+  - key: ff_block1_base
+    sheet: "Football field"
+    cell: "C46"
+    description: "Football field first block base"
+  - key: ff_block1_delta1
+    sheet: "Football field"
+    cell: "D46"
+    description: "Football field first block delta 1"
+  - key: ff_block1_delta2
+    sheet: "Football field"
+    cell: "E46"
+    description: "Football field first block delta 2"
+  - key: ff_block2_base
+    sheet: "Football field"
+    cell: "C47"
+    description: "Football field second block base"
+
+  - key: patrimoniale_base
+    sheet: "Patrimoniale e misto"
+    cell: "C17"
+    description: "Patrimoniale baseline"
+  - key: patrimoniale_ev
+    sheet: "Patrimoniale e misto"
+    cell: "C86"
+    description: "Patrimoniale EV output"
+  - key: patrimoniale_equity
+    sheet: "Patrimoniale e misto"
+    cell: "C95"
+    description: "Patrimoniale equity output"
+
+  - key: actual_year
+    sheet: "Actual data"
+    cell: "I8"
+    description: "Latest historical year"
+  - key: actual_margin_y1
+    sheet: "Actual data"
+    cell: "C23"
+    description: "Actual margin first year"

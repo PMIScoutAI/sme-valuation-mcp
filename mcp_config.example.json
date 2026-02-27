@@ -1,0 +1,14 @@
+﻿# Example local MCP config (adapt to your Claude client format)
+# Command target:
+#   python -m src.mcp_server
+# Working dir:
+#   C:\\Mcp
+{
+  "mcpServers": {
+    "pmi-valuation": {
+      "command": "python",
+      "args": ["-m", "src.mcp_server"],
+      "cwd": "C:\\Mcp"
+    }
+  }
+}

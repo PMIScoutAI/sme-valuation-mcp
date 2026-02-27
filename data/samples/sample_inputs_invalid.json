@@ -1,0 +1,19 @@
+﻿{
+  "meta": {
+    "currency": "EUR",
+    "years": 0
+  },
+  "actuals": {
+    "revenue": [],
+    "ebitda": [2.0]
+  },
+  "assumptions": {
+    "tax_rate": 1.5,
+    "wacc": -0.1,
+    "terminal_growth": 0.2,
+    "revenue_cagr": 1.5,
+    "ebitda_margin": 2.0,
+    "capex_pct_revenue": 0.05,
+    "nwc_pct_revenue": 0.04
+  }
+}
