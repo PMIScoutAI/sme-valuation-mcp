@@ -2,7 +2,7 @@
     [Parameter(Mandatory = $true)]
     [string]$RepoName,
 
-    [string]$Description = "PMI Valuation MCP",
+    [string]$Description = "SME Valuation MCP",
 
     [switch]$Private,
 

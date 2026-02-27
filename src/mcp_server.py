@@ -32,7 +32,7 @@ except Exception:  # pragma: no cover
 
 
 if FastMCP is not None:
-    mcp = FastMCP("pmi-valuation-engine")
+    mcp = FastMCP("sme-valuation-engine")
 
     @mcp.tool()
     def validate_input(payload_json: str) -> dict[str, Any]:

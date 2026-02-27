@@ -1,5 +1,5 @@
 ﻿version: "0.2"
-source_workbook: "PMI_datapack.xlsx"
+source_workbook: "SME_datapack.xlsx"
 notes:
   - "Celle output selezionate con valore non nullo su workbook baseline."
   - "Usare questo file come baseline regressiva cross-sheet."
@@ -90,18 +90,18 @@ outputs:
     cell: "C47"
     description: "Football field second block base"
 
-  - key: patrimoniale_base
+  - key: asset_mixed_base
     sheet: "Patrimoniale e misto"
     cell: "C17"
-    description: "Patrimoniale baseline"
-  - key: patrimoniale_ev
+    description: "Asset/mixed method baseline"
+  - key: asset_mixed_ev
     sheet: "Patrimoniale e misto"
     cell: "C86"
-    description: "Patrimoniale EV output"
-  - key: patrimoniale_equity
+    description: "Asset/mixed method EV output"
+  - key: asset_mixed_equity
     sheet: "Patrimoniale e misto"
     cell: "C95"
-    description: "Patrimoniale equity output"
+    description: "Asset/mixed method equity output"
 
   - key: actual_year
     sheet: "Actual data"
@@ -111,3 +111,5 @@ outputs:
     sheet: "Actual data"
     cell: "C23"
     description: "Actual margin first year"
+
+

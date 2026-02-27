@@ -1,7 +1,7 @@
 ﻿model:
-  name: "pmi_datapack_standard_engine"
+  name: "sme_valuation_standard_engine"
   version: "0.1.0"
-  description: "Valuation datapack standardizzato (proiezioni + DCF + multipli + football field)."
+  description: "Standardized SME valuation datapack (projections + DCF + multiples + football field)."
 
 conventions:
   nfp_sign: "positive_is_net_debt"

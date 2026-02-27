@@ -1,5 +1,5 @@
 {
-  "source_file": "C:\\Mcp\\PMI_datapack.xlsx",
+  "source_file": "C:\\Mcp\\SME_datapack.xlsx",
   "sheets": [
     {
       "sheet": "Football field",
@@ -17,13 +17,13 @@
       "sheet": "Income method",
       "used_range": "A1:K89",
       "formula_count": 221,
-      "terminal_candidates_count": 35
+      "terminal_candidates_count": 34
     },
     {
       "sheet": "Patrimoniale e misto",
       "used_range": "A1:M98",
       "formula_count": 173,
-      "terminal_candidates_count": 9
+      "terminal_candidates_count": 8
     },
     {
       "sheet": "Multipli di transazioni",
@@ -451,12 +451,8 @@
         "formula": "=+F28-F33"
       },
       {
-        "cell": "C86",
-        "formula": "=+C73"
-      },
-      {
         "cell": "D87",
-        "formula": "=<openpyxl.worksheet.formula.DataTableFormula object at 0x000001F828625A70>"
+        "formula": "=<openpyxl.worksheet.formula.DataTableFormula object at 0x000002C86B389A70>"
       },
       {
         "cell": "C95",
@@ -464,7 +460,7 @@
       },
       {
         "cell": "D96",
-        "formula": "=<openpyxl.worksheet.formula.DataTableFormula object at 0x000001F828628710>"
+        "formula": "=<openpyxl.worksheet.formula.DataTableFormula object at 0x000002C86B38C710>"
       }
     ],
     "Multipli di transazioni": [

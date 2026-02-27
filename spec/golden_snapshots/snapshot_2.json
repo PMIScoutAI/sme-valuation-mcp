@@ -1,6 +1,6 @@
 {
   "scenario": "baseline_repeat",
-  "source_workbook": "C:\\Mcp\\PMI_datapack.xlsx",
+  "source_workbook": "C:\\Mcp\\SME_datapack.xlsx",
   "golden_outputs": "C:\\Mcp\\spec\\golden_outputs.yaml",
   "values": [
     {
@@ -144,24 +144,24 @@
       "value": 67.99532135966228
     },
     {
-      "key": "patrimoniale_base",
+      "key": "asset_mixed_base",
       "sheet": "Patrimoniale e misto",
       "cell": "C17",
-      "description": "Patrimoniale baseline",
+      "description": "Asset/mixed method baseline",
       "value": 36461.0
     },
     {
-      "key": "patrimoniale_ev",
+      "key": "asset_mixed_ev",
       "sheet": "Patrimoniale e misto",
       "cell": "C86",
-      "description": "Patrimoniale EV output",
+      "description": "Asset/mixed method EV output",
       "value": 54667.351092185796
     },
     {
-      "key": "patrimoniale_equity",
+      "key": "asset_mixed_equity",
       "sheet": "Patrimoniale e misto",
       "cell": "C95",
-      "description": "Patrimoniale equity output",
+      "description": "Asset/mixed method equity output",
       "value": 40203.351092185796
     },
     {

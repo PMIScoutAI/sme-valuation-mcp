@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://local/pmi_datapack/schema.json",
-  "title": "PMI Datapack Input",
+  "$id": "https://local/sme_valuation/schema.json",
+  "title": "SME Valuation Input",
   "type": "object",
   "additionalProperties": false,
   "required": ["meta", "actuals", "assumptions"],

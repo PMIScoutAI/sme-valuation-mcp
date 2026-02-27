@@ -5,7 +5,7 @@
 #   C:\\Mcp
 {
   "mcpServers": {
-    "pmi-valuation": {
+    "sme-valuation": {
       "command": "python",
       "args": ["-m", "src.mcp_server"],
       "cwd": "C:\\Mcp"

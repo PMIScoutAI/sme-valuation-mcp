@@ -1,1 +1,1 @@
-﻿"""PMI valuation engine package."""
+﻿"""SME valuation engine package."""
