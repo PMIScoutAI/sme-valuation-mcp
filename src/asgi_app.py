@@ -1,7 +1,5 @@
 ﻿from __future__ import annotations
 
-from contextlib import asynccontextmanager
-
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse
 from starlette.routing import Mount, Route
@@ -27,17 +25,27 @@ if mcp is None:
         ]
     )
 else:
-    mcp_http_app = mcp.streamable_http_app()
+    try:
+        mcp_http_app = mcp.streamable_http_app()
+    except Exception as exc:  # pragma: no cover
+        error_message = f"mcp init failed: {exc}"
 
-    @asynccontextmanager
-    async def lifespan(_: Starlette):
-        async with mcp_http_app.session_manager.run():
-            yield
+        async def mcp_init_error(_: object) -> JSONResponse:
+            return JSONResponse(
+                {"ok": False, "error": error_message},
+                status_code=500,
+            )
 
-    app = Starlette(
-        lifespan=lifespan,
-        routes=[
-            Route("/health", health, methods=["GET"]),
-            Mount("/mcp", app=mcp_http_app),
-        ],
-    )
+        app = Starlette(
+            routes=[
+                Route("/health", health, methods=["GET"]),
+                Route("/mcp", mcp_init_error, methods=["GET", "POST"]),
+            ]
+        )
+    else:
+        app = Starlette(
+            routes=[
+                Route("/health", health, methods=["GET"]),
+                Mount("/mcp", app=mcp_http_app),
+            ],
+        )
