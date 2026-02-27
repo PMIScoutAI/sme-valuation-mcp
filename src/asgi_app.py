@@ -7,6 +7,17 @@ from starlette.routing import Mount, Route
 from src.mcp_server import mcp
 
 
+async def root(_: object) -> JSONResponse:
+    return JSONResponse(
+        {
+            "ok": True,
+            "service": "sme-valuation-mcp",
+            "mcp_endpoint": "/mcp",
+            "health_endpoint": "/health",
+        }
+    )
+
+
 async def health(_: object) -> JSONResponse:
     return JSONResponse({"ok": True})
 
@@ -18,12 +29,13 @@ if mcp is None:
             status_code=500,
         )
 
-    app = Starlette(
-        routes=[
-            Route("/health", health, methods=["GET"]),
-            Route("/mcp", mcp_unavailable, methods=["GET", "POST"]),
-        ]
-    )
+        app = Starlette(
+            routes=[
+                Route("/", root, methods=["GET"]),
+                Route("/health", health, methods=["GET"]),
+                Route("/mcp", mcp_unavailable, methods=["GET", "POST"]),
+            ]
+        )
 else:
     try:
         mcp_http_app = mcp.streamable_http_app()
@@ -38,6 +50,7 @@ else:
 
         app = Starlette(
             routes=[
+                Route("/", root, methods=["GET"]),
                 Route("/health", health, methods=["GET"]),
                 Route("/mcp", mcp_init_error, methods=["GET", "POST"]),
             ]
@@ -45,6 +58,7 @@ else:
     else:
         app = Starlette(
             routes=[
+                Route("/", root, methods=["GET"]),
                 Route("/health", health, methods=["GET"]),
                 Mount("/mcp", app=mcp_http_app),
             ],
