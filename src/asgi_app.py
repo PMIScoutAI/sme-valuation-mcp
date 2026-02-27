@@ -1,6 +1,8 @@
 ﻿from __future__ import annotations
 
 from starlette.applications import Starlette
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 from starlette.routing import Mount, Route
 
@@ -21,6 +23,15 @@ async def root(_: object) -> JSONResponse:
 async def health(_: object) -> JSONResponse:
     return JSONResponse({"ok": True})
 
+middlewares = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+]
+
 
 if mcp is None:
     async def mcp_unavailable(_: object) -> JSONResponse:
@@ -29,12 +40,13 @@ if mcp is None:
             status_code=500,
         )
 
-        app = Starlette(
-            routes=[
-                Route("/", root, methods=["GET"]),
-                Route("/health", health, methods=["GET"]),
-                Route("/mcp", mcp_unavailable, methods=["GET", "POST"]),
-            ]
+    app = Starlette(
+        middleware=middlewares,
+        routes=[
+            Route("/", root, methods=["GET"]),
+            Route("/health", health, methods=["GET"]),
+            Route("/mcp", mcp_unavailable, methods=["GET", "POST"]),
+        ]
         )
 else:
     try:
@@ -49,6 +61,7 @@ else:
             )
 
         app = Starlette(
+            middleware=middlewares,
             routes=[
                 Route("/", root, methods=["GET"]),
                 Route("/health", health, methods=["GET"]),
@@ -57,6 +70,7 @@ else:
         )
     else:
         app = Starlette(
+            middleware=middlewares,
             routes=[
                 Route("/", root, methods=["GET"]),
                 Route("/health", health, methods=["GET"]),
