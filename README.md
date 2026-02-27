@@ -41,6 +41,59 @@ powershell -ExecutionPolicy Bypass -File .\scripts\start_mcp.ps1
 - `list_scenarios()`
   - lists files in `data/samples/*.json`
 
+## Examples
+### Example 1: Run valuation from sample input
+```powershell
+python -m src.engine.run \
+  --input data/samples/sample_inputs_1.json \
+  --schema spec/schema.json \
+  --output data/samples/sample_output_1.json
+```
+
+### Example 2: Validate input shape quickly
+Use `data/samples/sample_inputs_invalid.json` to test validation failures:
+```powershell
+python -m unittest tests/test_schema_validation.py -v
+```
+
+### Example 3: Minimal MCP payload for `run_valuation`
+`payload_json` content:
+```json
+{
+  "meta": { "company_name": "SME Demo Ltd", "currency": "EUR", "years": 5 },
+  "actuals": { "revenue": [12.5, 13.1, 14.0], "ebitda": [2.1, 2.3, 2.6], "nfp": 4.5 },
+  "assumptions": {
+    "tax_rate": 0.27,
+    "wacc": 0.11,
+    "terminal_growth": 0.02,
+    "revenue_cagr": 0.06,
+    "ebitda_margin": 0.19,
+    "capex_pct_revenue": 0.04,
+    "nwc_pct_revenue": 0.03
+  },
+  "multiples": { "ev_ebitda_multiple": 7.5, "ev_ebit_multiple": 10.0 }
+}
+```
+Expected output sections:
+- `projections.revenue|ebitda|fcf`
+- `valuation.dcf.enterprise_value|equity_value`
+- `valuation.multiples.enterprise_value|equity_value`
+- `valuation.football_field.low|mid|high`
+
+### Example 4: Ready-to-paste prompt for Claude (with MCP connected)
+```text
+Use the MCP server "sme-valuation-engine".
+1) Call list_scenarios() and pick sample_inputs_1.json.
+2) Load that JSON and call validate_input(payload_json).
+3) If validation is ok, call run_valuation(payload_json).
+4) Return a short summary with:
+- DCF enterprise value and equity value
+- Multiples enterprise value and equity value
+- Football field low, mid, high
+- 3 projected revenue values
+If validation fails, show the errors clearly.
+```
+
 ## Run engine without MCP
 ```powershell
 python -m src.engine.run \
