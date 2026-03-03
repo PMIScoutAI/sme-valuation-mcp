@@ -9,11 +9,11 @@
 ![Python](https://img.shields.io/badge/python-3.11+-blue?logo=python)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![MCP](https://img.shields.io/badge/MCP-compatible-blueviolet)
-![Railway](https://img.shields.io/badge/deploy-Railway-purple?logo=railway)
+![Render](https://img.shields.io/badge/deploy-Render-46E3B7?logo=render)
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
 ![Claude](https://img.shields.io/badge/Claude-ready-orange)
 
-[**Quick Start**](#quick-start) · [**MCP Tools**](#available-mcp-tools) · [**Deploy**](#deploy-on-railway) · [**Examples**](#examples)
+[**Quick Start**](#quick-start) · [**MCP Tools**](#available-mcp-tools) · [**Deploy**](#deploy-on-render) · [**Examples**](#examples)
 
 </div>
 
@@ -151,26 +151,26 @@ Use the MCP server "sme-valuation-engine".
         | Python 3.11+ | Core runtime |
         | Windows (local) | Required only for Excel snapshot generation |
         | Microsoft Excel (local) | Required only for Excel snapshot generation |
-        | Railway / Linux | Full remote MCP runtime (no Excel dependency) |
+        | Render / Linux | Full remote MCP runtime (no Excel dependency) |
 
         ---
 
-        ## Deploy on Railway
+        ## Deploy on Render
 
         ```bash
-        # Push to GitHub, then in Railway:
-        # New Project → Deploy from GitHub → select this repo
-        # Railway auto-detects Python via railway.json
+        # Push to GitHub, then on render.com:
+        # New → Web Service → connect repo → select this repo
+        # Render auto-detects Python via Procfile
 
         # Verify deployment:
         GET https://<your-domain>/health  →  {"ok": true}
 
         # Your MCP endpoint:
-        https://<your-railway-domain>/mcp
+        https://<your-render-domain>/mcp
         ```
 
         > ℹ️ Excel snapshot features are local-only (Windows + xlwings).
-        > > The core valuation engine runs fully on Railway Linux.
+        > > The core valuation engine runs fully on Render Linux.
         > >
         > > ### Connect to Claude
         > >
@@ -250,7 +250,7 @@ Use the MCP server "sme-valuation-engine".
         > > - [ ] | Valuation engine v1 | ✅ Ready |
         > > - [ ] | Schema validation | ✅ Ready |
         > > - [ ] | MCP server | ✅ Ready |
-        > > - [ ] | Railway deploy | ✅ Ready |
+        > > - [ ] | Render deploy | ✅ Ready |
         > > - [ ] | Excel baseline snapshots | ✅ Ready (local only) |
         > >
         > > - [ ] ---

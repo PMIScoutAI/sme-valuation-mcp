@@ -1,14 +1,22 @@
-﻿# Example local MCP config (adapt to your Claude client format)
-# Command target:
-#   python -m src.mcp_server
-# Working dir:
-#   C:\\Mcp
+# Example MCP config (adapt to your Claude client format)
+
+# Option A — Local (run the server on your machine)
+# {
+#   "mcpServers": {
+#     "sme-valuation": {
+#       "command": "python",
+#       "args": ["-m", "src.mcp_server"],
+#       "cwd": "/path/to/sme-valuation-mcp"
+#     }
+#   }
+# }
+
+# Option B — Remote via Render (recommended)
 {
   "mcpServers": {
     "sme-valuation": {
-      "command": "python",
-      "args": ["-m", "src.mcp_server"],
-      "cwd": "C:\\Mcp"
+      "type": "sse",
+      "url": "https://sme-valuation-mcp.onrender.com/mcp"
     }
   }
 }
