@@ -1,178 +1,270 @@
-﻿# SME Valuation MCP
+<div align="center">
 
-A standard Python valuation engine for SMEs, exposed through MCP tools for Claude-compatible clients.
+# 🏦 SME Valuation MCP
 
-## What this project does
-- validates input payloads with an official JSON schema
-- computes valuation v1 (Projections, DCF, Multiples, Football Field)
-- exposes MCP tools for agent workflows
-- generates Excel baseline snapshots for numeric regression checks
+### The valuation engine that runs inside your AI agent.
 
-## Requirements
-- Windows
-- Python 3.11+
-- Microsoft Excel installed (required only for snapshot generation)
+**DCF · Multiples · Football Field — exposed as MCP tools for Claude and any LLM agent.**
 
-## Quick start
-```powershell
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install -r requirements.txt
+![Python](https://img.shields.io/badge/python-3.11+-blue?logo=python)
+![License](https://img.shields.io/badge/license-MIT-green)
+![MCP](https://img.shields.io/badge/MCP-compatible-blueviolet)
+![Railway](https://img.shields.io/badge/deploy-Railway-purple?logo=railway)
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+![Claude](https://img.shields.io/badge/Claude-ready-orange)
+
+[**Quick Start**](#quick-start) · [**MCP Tools**](#available-mcp-tools) · [**Deploy**](#deploy-on-railway) · [**Examples**](#examples)
+
+</div>
+
+---
+
+## The Problem
+
+Valuing an SME requires DCF models, comparable multiples, and Football Field synthesis —
+work that takes a financial analyst hours in Excel.
+
+**SME Valuation MCP wraps that entire engine as callable MCP tools**, so Claude (or any
+MCP-compatible agent) can run a full professional valuation in seconds, on any payload you feed it.
+
+No consultants. No spreadsheets. Just structured JSON in, structured valuation out.
+
+---
+
+## How It Works
+
+```mermaid
+graph LR
+    A[Claude / AI Agent] -->|MCP call| B[sme-valuation-mcp]
+    B --> C{Schema Validator}
+    C -->|valid| D[DCF Engine]
+    C -->|valid| E[Multiples Engine]
+    C -->|valid| F[Football Field]
+    D & E & F --> G[Unified JSON Output]
+    G --> A
+    B -.->|local only| H[Excel Snapshot Engine]
 ```
 
-## Start MCP server (one command)
-With virtualenv active:
-```powershell
+---
+
+## Quick Start
+
+```bash
+# 1. Clone & install
+git clone https://github.com/PMIScoutAI/sme-valuation-mcp.git
+cd sme-valuation-mcp
+python -m venv .venv && .venv\Scripts\activate
+pip install -r requirements.txt
+
+# 2. Start MCP server
 python -m src.mcp_server
-```
 
-Helper script:
-```powershell
+# 3. Or use the helper script
 powershell -ExecutionPolicy Bypass -File .\scripts\start_mcp.ps1
 ```
 
-## Available MCP tools
-- `validate_input(payload_json: str)`
-  - returns `ok` and `errors`
-- `run_valuation(payload_json: str)`
-  - returns valuation output JSON
-- `get_model_spec()`
-  - returns the content of `spec/model_spec.yaml`
-- `list_scenarios()`
-  - lists files in `data/samples/*.json`
+---
+
+## Available MCP Tools
+
+| Tool | Description | Returns |
+|------|-------------|---------|
+| `validate_input(payload_json)` | Validates payload against JSON schema | `ok`, `errors` |
+| `run_valuation(payload_json)` | Runs full valuation (DCF + Multiples + FF) | Full valuation JSON |
+| `get_model_spec()` | Returns the model specification | YAML content |
+| `list_scenarios()` | Lists available sample scenarios | File list |
+
+---
+
+## Use Cases
+
+**For AI Developers**
+Integrate professional-grade valuation into your agent workflows. Use `run_valuation()` as a tool call within any Claude or LangChain pipeline.
+
+**For SaaS Founders**
+Embed a due-diligence valuation layer in your product without building the financial model from scratch. Fork, adapt, deploy.
+
+**For Financial Consultants**
+Run repeatable, auditable valuation workflows via Claude — and export results to Excel for client-ready presentations.
+
+---
 
 ## Examples
-### Example 1: Run valuation from sample input
-```powershell
-python -m src.engine.run \
-  --input data/samples/sample_inputs_1.json \
-  --schema spec/schema.json \
-  --output data/samples/sample_output_1.json
+
+### Example 1 — Ready-to-paste Claude prompt
+
+```
+Use the MCP server "sme-valuation-engine".
+1. Call list_scenarios() and pick sample_inputs_1.json
+2. Load that JSON and call validate_input(payload_json)
+3. If valid, call run_valuation(payload_json)
+4. Return: DCF enterprise value, Multiples EV, Football Field low/mid/high,
+   and 3 projected revenue values
 ```
 
-### Example 2: Validate input shape quickly
-Use `data/samples/sample_inputs_invalid.json` to test validation failures:
-```powershell
-python -m unittest tests/test_schema_validation.py -v
-```
+### Example 2 — Minimal JSON payload
 
-### Example 3: Minimal MCP payload for `run_valuation`
-`payload_json` content:
 ```json
 {
-  "meta": { "company_name": "SME Demo Ltd", "currency": "EUR", "years": 5 },
-  "actuals": { "revenue": [12.5, 13.1, 14.0], "ebitda": [2.1, 2.3, 2.6], "nfp": 4.5 },
+  "meta": { "company_name": "Acme SME", "currency": "EUR", "years": 5 },
+  "actuals": {
+    "revenue": [12.5, 13.1, 14.0],
+    "ebitda": [2.1, 2.3, 2.6],
+    "nfp": 4.5
+  },
   "assumptions": {
-    "tax_rate": 0.27,
-    "wacc": 0.11,
-    "terminal_growth": 0.02,
-    "revenue_cagr": 0.06,
-    "ebitda_margin": 0.19,
-    "capex_pct_revenue": 0.04,
-    "nwc_pct_revenue": 0.03
+    "tax_rate": 0.27, "wacc": 0.11, "terminal_growth": 0.02,
+    "revenue_cagr": 0.06, "ebitda_margin": 0.19,
+    "capex_pct_revenue": 0.04, "nwc_pct_revenue": 0.03
   },
   "multiples": { "ev_ebitda_multiple": 7.5, "ev_ebit_multiple": 10.0 }
 }
 ```
-Expected output sections:
-- `projections.revenue|ebitda|fcf`
-- `valuation.dcf.enterprise_value|equity_value`
-- `valuation.multiples.enterprise_value|equity_value`
-- `valuation.football_field.low|mid|high`
 
-### Example 4: Ready-to-paste prompt for Claude (with MCP connected)
-```text
-Use the MCP server "sme-valuation-engine".
-1) Call list_scenarios() and pick sample_inputs_1.json.
-2) Load that JSON and call validate_input(payload_json).
-3) If validation is ok, call run_valuation(payload_json).
-4) Return a short summary with:
-- DCF enterprise value and equity value
-- Multiples enterprise value and equity value
-- Football field low, mid, high
-- 3 projected revenue values
-If validation fails, show the errors clearly.
-```
+**Expected output sections:**
+- `projections.revenue` · `projections.ebitda` · `projections.fcf`
+- - `valuation.dcf.enterprise_value` · `valuation.dcf.equity_value`
+  - - `valuation.multiples.enterprise_value` · `valuation.multiples.equity_value`
+    - - `valuation.football_field.low` · `valuation.football_field.mid` · `valuation.football_field.high`
+     
+      - ### Example 3 — Run engine without MCP
+     
+      - ```bash
+        python -m src.engine.run \
+          --input data/samples/sample_inputs_1.json \
+          --schema spec/schema.json \
+          --output data/samples/sample_output_1.json
+        ```
 
-## Run engine without MCP
-```powershell
-python -m src.engine.run \
-  --input data/samples/sample_inputs_1.json \
-  --schema spec/schema.json \
-  --output data/samples/sample_output_1.json
-```
+        ### Example 4 — Validate input shape
 
-## Tests
-```powershell
-python -m unittest discover -s tests -p "test_*.py" -v
-```
+        ```bash
+        python -m unittest tests/test_schema_validation.py -v
+        ```
 
-## Excel baseline snapshots
-1. Configure golden cells in `spec/golden_outputs.yaml`
-2. Run:
-```powershell
-python src/excel/compute_snapshot_xlwings.py \
-  --excel SME_datapack.xlsx \
-  --golden-outputs spec/golden_outputs.yaml \
-  --output spec/golden_snapshots/snapshot_1.json \
-  --scenario baseline \
-  --inputs data/samples/sample_inputs_2.json
-```
+        ---
 
-Note: some workbook sheet names are in Italian because they come from the original Excel model.
+        ## Requirements
 
-## Main project structure
-- `src/engine/` valuation logic
-- `src/mcp_server.py` MCP server
-- `spec/model_spec.yaml` data contract
-- `spec/schema.json` input validation schema
-- `spec/golden_outputs.yaml` baseline cell list
-- `spec/golden_snapshots/` numeric snapshots
+        | Requirement | Notes |
+        |-------------|-------|
+        | Python 3.11+ | Core runtime |
+        | Windows (local) | Required only for Excel snapshot generation |
+        | Microsoft Excel (local) | Required only for Excel snapshot generation |
+        | Railway / Linux | Full remote MCP runtime (no Excel dependency) |
 
-## Connect to Claude
-Register this MCP server in your client MCP config with:
-`python -m src.mcp_server`
+        ---
 
-A minimal config template is in `mcp_config.example.json`.
+        ## Deploy on Railway
 
-## Deploy on Railway (for Claude web / remote MCP)
-1. Push this repo to GitHub.
-2. In Railway: `New Project` -> `Deploy from GitHub repo` -> select this repository.
-3. Railway auto-detects Python and uses `railway.json`.
-4. After deploy, open the public URL and verify:
-   - `GET /health` returns `{"ok": true}`
-5. Your MCP endpoint is:
-   - `https://<your-railway-domain>/mcp`
+        ```bash
+        # Push to GitHub, then in Railway:
+        # New Project → Deploy from GitHub → select this repo
+        # Railway auto-detects Python via railway.json
 
-Important:
-- `xlwings` is Windows-only and is not installed on Railway Linux (already handled in `requirements.txt`).
-- Excel snapshot scripts are local-only; remote runtime is the MCP valuation engine.
+        # Verify deployment:
+        GET https://<your-domain>/health  →  {"ok": true}
 
-## Publish to GitHub
-Recommended flow:
-1. create an empty GitHub repo (no auto README)
-2. connect local remote
-3. push `main`
+        # Your MCP endpoint:
+        https://<your-railway-domain>/mcp
+        ```
 
-Manual commands:
-```powershell
-git init
-git add .
-git commit -m "Initial release: SME Valuation MCP v1"
-git branch -M main
-git remote add origin <GITHUB_REPO_URL>
-git push -u origin main
-```
+        > ℹ️ Excel snapshot features are local-only (Windows + xlwings).
+        > > The core valuation engine runs fully on Railway Linux.
+        > >
+        > > ### Connect to Claude
+        > >
+        > > Register this MCP server in your client config:
+        > >
+        > > ```json
+        > > {
+        > >   "mcpServers": {
+        > >     "sme-valuation-engine": {
+        > >       "command": "python",
+        > >       "args": ["-m", "src.mcp_server"]
+        > >     }
+        > >   }
+        > > }
+        > > ```
+        > >
+        > > A minimal config template is available in `mcp_config.example.json`.
+        > >
+        > > ---
+        > >
+        > > ## Project Structure
+        > >
+        > > ```
+        > > src/
+        > >   engine/           # Valuation logic (DCF, Multiples, Football Field)
+        > >   mcp_server.py     # MCP server entrypoint
+        > > spec/
+        > >   model_spec.yaml   # Data contract
+        > >   schema.json       # Input validation schema
+        > >   golden_snapshots/ # Numeric regression baselines
+        > > data/samples/       # Sample inputs & outputs
+        > > tests/              # Test suite
+        > > scripts/            # Helper scripts (start, publish)
+        > > ```
+        > >
+        > > ---
+        > >
+        > > ## Tests
+        > >
+        > > ```bash
+        > > # Run all tests
+        > > python -m unittest discover -s tests -p "test_*.py" -v
+        > >
+        > > # Excel baseline snapshots (local only)
+        > > python src/excel/compute_snapshot_xlwings.py \
+        > >   --excel SME_datapack.xlsx \
+        > >   --golden-outputs spec/golden_outputs.yaml \
+        > >   --output spec/golden_snapshots/snapshot_1.json \
+        > >   --scenario baseline \
+        > >   --inputs data/samples/sample_inputs_2.json
+        > > ```
+        > >
+        > > ---
+        > >
+        > > ## Roadmap
+        > >
+        > > - [ ] EBITDA normalization module
+        > > - [ ] - [ ] Multi-currency support
+        > > - [ ] - [ ] Sector-specific multiple databases
+        > > - [ ] - [ ] OpenAI / LangChain tool adapter
+        > > - [ ] - [ ] Web UI for non-technical users
+        > >
+        > > - [ ] ---
+        > >
+        > > - [ ] ## Contributing
+        > >
+        > > - [ ] PRs and issues are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md).
+        > >
+        > > - [ ] Issues tagged [`good first issue`](../../issues?q=label%3A%22good+first+issue%22) are a great starting point.
+        > >
+        > > - [ ] ---
+        > >
+        > > - [ ] ## Status
+        > >
+        > > - [ ] | Component | Status |
+        > > - [ ] |-----------|--------|
+        > > - [ ] | Valuation engine v1 | ✅ Ready |
+        > > - [ ] | Schema validation | ✅ Ready |
+        > > - [ ] | MCP server | ✅ Ready |
+        > > - [ ] | Railway deploy | ✅ Ready |
+        > > - [ ] | Excel baseline snapshots | ✅ Ready (local only) |
+        > >
+        > > - [ ] ---
+        > >
+        > > - [ ] ## License
+        > >
+        > > - [ ] MIT — free to use, fork, and adapt commercially.
+        > >
+        > > - [ ] ---
+        > >
+        > > - [ ] <div align="center">
 
-Automated script (create repo via API + push):
-```powershell
-$env:GITHUB_TOKEN="<GITHUB_PAT>"
-powershell -ExecutionPolicy Bypass -File .\scripts\publish_github.ps1 -RepoName "sme-valuation-mcp" -Description "SME Valuation MCP"
-```
+        **If this saves you time, a ⭐ helps others find it.**
 
-## Current status
-- valuation engine v1 ready
-- schema validation ready
-- Excel baseline snapshots ready
-- MCP server ready (requires `mcp` package)
+        Built by [PMIScoutAI](https://github.com/PMIScoutAI) · [Open an issue](../../issues/new) · [Fork & extend](../../fork)
 
+        </div>
